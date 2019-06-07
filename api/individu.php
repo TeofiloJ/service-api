@@ -67,6 +67,7 @@ class individu
     }
     function post($request_data = null)
     {
+        var_dump($request_data);
         $individu=$this->_validation($request_data);
         $req="INSERT INTO Individu (prenom, nom, email) VALUES (?,?,?)";
         $prep=$this->bd->prepare($req);
