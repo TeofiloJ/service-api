@@ -6,5 +6,6 @@ $r = new Restler();
 $r->addAPIClass('facture');
 $r->addAPIClass('reservation');
 $r->addAPIClass('individu');
+$r->addAPIClass('templacement');
 $r->handle();
 ?>
