@@ -4,11 +4,11 @@ use Luracast\Restler\RestException;
 require_once("./cfg/localData.php");
 class emplacements
 {
-    private $bd;
+    private $db;
     static $CHAMPS = array('id_type','occupe', 'surface', 'nb_max');
     function __construct()
     {
-        $this->bd = new PDO(DNS, USER, MDP);
+        $this->db = new PDO(DNS, USER, MDP);
     }
     function head()
     {
@@ -26,7 +26,7 @@ class emplacements
 		$id=htmlentities($id);
         if ($id != null) {
             $req="select * from emplacements where id=?";
-            $prep=$this->bd->prepare($req);
+            $prep=$this->db->prepare($req);
             $prep->bindParam(1, $id);
             $prep->execute();
             if (empty($emplacements = $prep->fetchObject()) && $id != null) {
@@ -56,7 +56,7 @@ class emplacements
             $retour=$emplacements;
         } else {
             $req="select * from emplacements";
-            $resultat = $this->bd->query($req);
+            $resultat = $this->db->query($req);
             $indiv=new emplacements();
             while ($emplacements=$resultat->fetchObject()) {
                 $emplacements->id=intval($emplacements->id);
@@ -69,7 +69,7 @@ class emplacements
     {
         $emplacements=$this->_validation($request_data);
         $req="INSERT INTO emplacements (id_type, occupe, surface, nb_max) VALUES (?,?,?,?)";
-        $prep=$this->bd->prepare($req);
+        $prep=$this->db->prepare($req);
         $id_type=$emplacements["id_type"];//
         $occupe=$emplacements["occupe"];
         $surface=$emplacements["surface"];
@@ -79,7 +79,7 @@ class emplacements
         $prep->bindParam(3, $surface);
         $prep->bindParam(4, $nb_max);
         $prep->execute();
-        return $this->get($this->bd->lastInsertId());
+        return $this->get($this->db->lastInsertId());
     }
     //modification partielle
     function patch($id, $request_data = null)
@@ -91,7 +91,7 @@ class emplacements
         $occupe=$emplacements["occupe"];
         $surface=$emplacements["surface"];
         $nb_max=$emplacements["nb_max"];
-        $prep=$this->bd->prepare($req);
+        $prep=$this->db->prepare($req);
         $prep->bindParam(1, $id_type);
         $prep->bindParam(2, $occupe);
         $prep->bindParam(3, $surface);
@@ -109,7 +109,7 @@ class emplacements
         $occupe=$emplacements["occupe"];
         $surface=$emplacements["surface"];
         $nb_max=$emplacements["nb_max"];
-        $prep=$this->bd->prepare($req);
+        $prep=$this->db->prepare($req);
         $prep->bindParam(1, $id_type);
         $prep->bindParam(2, $occupe);
         $prep->bindParam(3, $surface);
@@ -127,7 +127,7 @@ class emplacements
         } else {
             try {
                 $req="delete from emplacements where id=?;";
-                $prep =$this->bd->prepare($req);
+                $prep =$this->db->prepare($req);
                 $prep->bindParam(1, $id);
                 //on exécute la requête sql
                 $prep->execute();
