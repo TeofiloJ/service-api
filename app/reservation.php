@@ -13,25 +13,11 @@
   </head>
   <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">API</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="index.php">Accueil</a>
-      <a class="nav-item nav-link" href="individu.php">Individus</a>
-      <a class="nav-item nav-link" href="reservation.php">Reservations</a>
-      </div>
-    </div>
-  </nav>
 
-  
 
 <form method="POST" action="ajoute.php">
-    Libellé:<input type="text" name="lib" size="40" value="" maxlength="35" required><br>
-    Quantité:<input type="number" name="qte" size="5" value="" maxlength="4" required><br>
+    client:<input type="select" name="lib" size="40" value="" maxlength="35" required><br>
+    nombre de personne:<input type="date" name="qte" size="5" value="" maxlength="4" required><br>
     <input type="submit" value="Ajouter" />
     <input type="submit" value="Annuler" formaction="exemple2.php"/>
 </form>
