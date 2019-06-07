@@ -9,5 +9,7 @@ $r->addAPIClass('individu');
 $r->addAPIClass('templacement');
 $r->addAPIClass('activites');
 $r->addAPIClass('emplacements');
+$r->addAPIClass('resemplacements');
+//$r->addAuthenticationClass('auth');
 $r->handle();
 ?>
