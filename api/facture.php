@@ -1,11 +1,11 @@
 <?php
 use Luracast\Restler\RestException;
 
-require_once("localData.php");
+require_once("./cfg/localData.php");
 class facture
 {
     private $db;
-    static $CHAMPS = array('id','id_client', 'date_debut', 'date_fin');
+    static $CHAMPS = array('id_reservation');
     function __construct()
     {
         $this->db = new PDO(DNS, USER, MDP);
@@ -68,50 +68,12 @@ class facture
     function post($request_data = null)
     {
         $facture=$this->_validation($request_data);
-        $req="INSERT INTO facture (id_client, date_debut, date_fin) VALUES (?,?,?)";
+        $req="INSERT INTO facture (id_reservation) VALUES (?)";
         $prep=$this->db->prepare($req);
-        $id_client=$facture["id_client"];//
-        $date_debut=$facture["date_debut"];
-        $date_fin=$facture["date_fin"];
-        $prep->bindParam(1, $id_client);
-        $prep->bindParam(2, $date_debut);
-        $prep->bindParam(3, $date_fin);
+        $id_reservation=$facture["id_reservation"];
+        $prep->bindParam(1, $id_reservation);
         $prep->execute();
         return $this->get($this->db->lastInsertId());
-    }
-    //modification partielle
-    function patch($id, $request_data = null)
-    {
-        $facture=$this->_rempli($id, $request_data);
-        $facture=$this->_validation($request_data);
-        $req="update facture set id_client=?, date_debut=?, date_fin=? where id=?";
-        $id_client=$facture["id_client"];//
-        $date_debut=$facture["date_debut"];
-        $date_fin=$facture["date_fin"];
-        
-        $prep=$this->db->prepare($req);
-        $prep->bindParam(1, $id_client);
-        $prep->bindParam(2, $date_debut);
-        $prep->bindParam(3, $date_fin);
-        $prep->bindParam(4, $id);
-        $prep->execute();
-        return $this->get($id);//$request_data;//$this->dp->update($id, $this->_validate($request_data));
-    }
-    function put($id, $request_data = null)
-    {
-        $facture=$this->_validation($request_data);
-    //$facture=$request_data;//$this->_rempli($request_data);
-        $req="update facture set id_client=?, date_debut=?, date_fin=? where id=?";
-        $id_client=$facture["id_client"];//
-        $date_debut=$facture["date_debut"];
-        $date_fin=$facture["date_fin"];
-        $prep=$this->db->prepare($req);
-        $prep->bindParam(1, $id_client);
-        $prep->bindParam(2, $date_debut);
-        $prep->bindParam(3, $date_fin);
-        $prep->bindParam(4, $id);
-        $prep->execute();
-        return $this->get($id);//$request_data;//$this->dp->update($id, $this->_validate($request_data));
     }
     function delete($id)
     {

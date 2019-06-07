@@ -4,6 +4,7 @@ use Luracast\Restler\Defaults;
 Defaults::$smartAutoRouting = false;
 $r = new Restler();
 $r->addAPIClass('facture');
-// $r->addAPIClass('individu');
+$r->addAPIClass('reservation');
+$r->addAPIClass('individu');
 $r->handle();
 ?>

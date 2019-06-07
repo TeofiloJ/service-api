@@ -1,7 +1,7 @@
 <?php
 use Luracast\Restler\RestException;
 
-require_once("localData.php");
+require_once("./cfg/localData.php");
 class individu
 {
     private $bd;
